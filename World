@@ -1,0 +1,23 @@
+
+		array_push($obj['columns'], array(header => 
+		$obj['columns'][count($obj['columns'])-1]['dataIndex'] = 'name';
+		array_push($obj['fields'], array(name => 'name'));
+		//$obj['fields'][count($obj['fields'])-1]['type'] = 'string';
+		
+		while ($result->fetch()) {
+			array_push($obj['fields'], array(name => $field));
+			//$obj['fields'][count($obj['fields'])-1]['type'] = $type;
+			
+			array_push($obj['columns'], array(header => $caption));
+			$obj['columns'][count($obj['columns'])-1]['dataIndex'] = $field;
+			$obj['columns'][count($obj['columns'])-1]['width'] = 'auto';
+			if ($editor == 1){
+				$xtype = ($type == "integer" || $type == "double" || $type == "string" || $type == "numeric" ? "textfield" : $type);
+				$obj['columns'][count($obj['columns'])-1]['editor'] = new StdClass();
+				$obj['columns'][count($obj['columns'])-1]['editor']->xtype = $xtype;
+				$obj['columns'][count($obj['columns'])-1]['editor']->allowBlank = !(bool)$mandatory;
+				if ($xtype == "combo"){
+					$obj['columns'][count($obj['columns'])-1]['editor']->listId = $listId;
+				}
+			}
+		}
